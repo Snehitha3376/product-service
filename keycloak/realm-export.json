@@ -1,0 +1,18 @@
+{
+  "realm": "microservices",
+  "enabled": true,
+  "clients": [{
+    "clientId": "microservices-client",
+    "enabled": true,
+    "publicClient": true,
+    "directAccessGrantsEnabled": true,
+    "standardFlowEnabled": true,
+    "redirectUris": ["*"],
+    "webOrigins": ["*"]
+  }],
+  "users": [{
+    "username": "student",
+    "enabled": true,
+    "credentials": [{"type": "password", "value": "student123", "temporary": false}]
+  }]
+}

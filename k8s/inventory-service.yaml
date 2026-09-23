@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-service
+  namespace: microservices
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: inventory-service}}
+  template:
+    metadata: {labels: {app: inventory-service}}
+    spec:
+      containers:
+        - name: inventory-service
+          image: your-dockerhub-user/inventory-service:latest
+          ports: [{containerPort: 8083}]
+          env:
+            - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI
+              value: http://keycloak:8080/realms/microservices
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-service
+  namespace: microservices
+spec:
+  selector: {app: inventory-service}
+  ports: [{port: 8083, targetPort: 8083}]
